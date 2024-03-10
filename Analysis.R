@@ -223,8 +223,8 @@ case <- ggplot(df, aes(x = Date, y = log10(value))) +
   geom_line(aes(color = Characteristics, linetype = Characteristics),cex=4) + 
   scale_color_manual(values = c("darkred", "blue"))+  xlab("Dates") + ylab("Cases (log10)") + 
   theme(legend.title = element_text(size=60),
-        legend.text = element_text(size=60),
-        legend.position="",
+        legend.text = element_text(size=80),
+        legend.position = c(0.18, 0.85),
         plot.title = element_text(hjust = 0.5),
         axis.text.x = element_text(angle = 0, vjust = 0.5, hjust=0.5),
         text=element_text(size=60)) 
@@ -253,8 +253,8 @@ death <- ggplot(df, aes(x = Date, y = log10(value))) +
   geom_line(aes(color = Characteristics, linetype = Characteristics),cex=4) + 
   scale_color_manual(values = c("darkred", "blue"))+ xlab("Dates")  + 
   ylab("Deaths (log10)") + theme(legend.title = element_text(size=60),
-                                                legend.text = element_text(size=60),
-                                                legend.position="bottom",
+                                                legend.text = element_text(size=80),
+                                                legend.position = c(0.18, 0.85),
                                                 plot.title = element_text(hjust = 0.5),
                                                 axis.text.x = element_text(angle = 0, vjust = 0.5, hjust=0.5),
                                                 text=element_text(size=60))
@@ -265,8 +265,6 @@ dates_vline <- which(df$Date %in% dates_vline)
 death <- death + geom_vline(xintercept = as.numeric(df$Date[dates_vline]),
                             col = "black", lwd = 2)
 death
-
-
 
 library(gridExtra)
 tiff("LineGraph.tiff", units="in", width=35, height=40, res=300)
@@ -319,7 +317,7 @@ Casesmap1 <- ggplot(data = q_1 , aes(x = long, y = lat)) +
         axis.title = element_text(size = 35),
         plot.title = element_text(size = 35),
         legend.title = element_text(size=35),
-        legend.text = element_text(size=35))
+        legend.text = element_text(size=35))+geom_hline(yintercept=23.8,linetype=5, color="red")
 
 Casesmap1
 
@@ -354,7 +352,7 @@ Deathsmap1 <- ggplot(data = q_1 , aes(x = long, y = lat)) +
         axis.title = element_text(size = 35),
         plot.title = element_text(size = 35),
         legend.title = element_text(size=35),
-        legend.text = element_text(size=35))
+        legend.text = element_text(size=35))+geom_hline(yintercept=23.8,linetype=5, color="red")
 
 Deathsmap1
 
