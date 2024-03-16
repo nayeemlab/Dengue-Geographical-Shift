@@ -50,6 +50,7 @@ Dengue <- read.csv("DengueAndWeatherDataRough2.csv")
 
 
 summary(Dengue$DC[Dengue$Month==1])
+summary(Dengue$Rainfall[Dengue$Month==3])
 
 fmonthwise <- Dengue[which(Dengue$Year<='2022'), ]
 sum(fmonthwise$DC)
@@ -317,7 +318,7 @@ Casesmap1 <- ggplot(data = q_1 , aes(x = long, y = lat)) +
         axis.title = element_text(size = 35),
         plot.title = element_text(size = 35),
         legend.title = element_text(size=35),
-        legend.text = element_text(size=35))+geom_hline(yintercept=23.8,linetype=5, color="red")
+        legend.text = element_text(size=35))+geom_hline(yintercept=23.8,linetype=5, color="red", size = 1.5)
 
 Casesmap1
 
@@ -352,7 +353,7 @@ Deathsmap1 <- ggplot(data = q_1 , aes(x = long, y = lat)) +
         axis.title = element_text(size = 35),
         plot.title = element_text(size = 35),
         legend.title = element_text(size=35),
-        legend.text = element_text(size=35))+geom_hline(yintercept=23.8,linetype=5, color="red")
+        legend.text = element_text(size=35))+geom_hline(yintercept=23.8,linetype=5, color="red", size = 1.5)
 
 Deathsmap1
 
@@ -385,7 +386,7 @@ IRmap1 <- ggplot(data = q_1 , aes(x = long, y = lat)) +
         axis.title = element_text(size = 35),
         plot.title = element_text(size = 35),
         legend.title = element_text(size=25),
-        legend.text = element_text(size=25))+geom_hline(yintercept=23.8,linetype=5, color="red")
+        legend.text = element_text(size=25))+geom_hline(yintercept=23.8,linetype=5, color="red", size = 1.5)
 
 IRmap1
 
