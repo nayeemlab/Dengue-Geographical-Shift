@@ -124,9 +124,6 @@ tiff("BoxDCDD.tiff", units="in", width=8, height=10, res=300)
 gridExtra::grid.arrange(a,b)
 dev.off()
 
-
-
-
 # agg = aggregate(Dengue$Rainfall, by = list(Dengue$Year), FUN = sum, na.omit = T)
 # 
 # 
@@ -156,7 +153,7 @@ x <- ggplot(fmonthwise, aes(x=as.factor(Month), y=Rainfall, colour=Group)) +
   geom_boxplot(fill="darkgreen", alpha=0.5) + 
   geom_line(data = afmonthwise,  
             mapping = aes(x=as.factor(Month), y=Rainfall, group=1, colour=Group), size = 1.5) +
-  ylab("Monthly Total Rainfall (mm)") + xlab("") + ggtitle("Monthly Total Rainfall, Bangladesh (2000-2023)") +
+  ylab("Monthly Total Rainfall (mm)") + xlab("") + ggtitle("Monthly Total Rainfall, Dhaka (2000-2023)") +
   scale_x_discrete(limits = c("1", "2", "3", 
                               "4", "5", "6", 
                               "7", "8", "9", 
@@ -178,7 +175,7 @@ y <- ggplot(fmonthwise, aes(x=as.factor(Month), y=AvgT, colour=Group)) +
   geom_boxplot(fill="darkred", alpha=0.5) + 
   geom_line(data = afmonthwise,  
             mapping = aes(x=as.factor(Month), y=AvgT, group=1, colour=Group), size = 1.5) +
-  ylab("Monthly Average Temperature (°C)") + xlab("Months") + ggtitle("Monthly Average Temperature, Bangladesh (2000-2023)") +
+  ylab("Monthly Average Temperature (°C)") + xlab("Months") + ggtitle("Monthly Average Temperature, Dhaka (2000-2023)") +
   scale_x_discrete(limits = c("1", "2", "3", 
                               "4", "5", "6", 
                               "7", "8", "9", 
@@ -193,8 +190,6 @@ y <- ggplot(fmonthwise, aes(x=as.factor(Month), y=AvgT, colour=Group)) +
   scale_color_manual(values=c("darkred", "black")) 
 
 y
-
-#01716074378
 
 
 tiff("BoxLine.tiff", units="in", width=8, height=10, res=300)
@@ -584,6 +579,13 @@ mean(Dhaka$AvgTemp)
 mean(dendat$AvgTemp)
 
 raindiff <- t.test(South$AvgTemp, North$AvgTemp, var.equal =T)
+raindiff
+
+mean(South$RH)
+mean(North$RH)
+mean(Dhaka$RH)
+
+raindiff <- t.test(South$RH, North$RH, var.equal =T)
 raindiff
 
 library(glmmTMB)
