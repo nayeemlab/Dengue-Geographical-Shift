@@ -45,9 +45,15 @@ library(ggrepel)
 library(ggplot2)
 library(tidyverse)
 
-setwd('E:\\ResearchProject\\Najmul Bhai\\Dengue\\Dengue 2023')
+setwd('E:\\ResearchProject\\Najmul Bhai\\Dengue\\Dengue Geographical Shift')
 Dengue <- read.csv("DengueAndWeatherDataRough2.csv")
 
+Dengue$DC
+Dengue$DD
+
+cor.test(Dengue$DC,Dengue$AvgT)
+cor.test(Dengue$DC,Dengue$Rainfall)
+cor.test(Dengue$DC,Dengue$RH)
 
 summary(Dengue$DC[Dengue$Month==1])
 summary(Dengue$Rainfall[Dengue$Month==3])
@@ -406,6 +412,8 @@ cor.test(sldata$Deaths,log10(sldata$PD))
 
 cor.test(sldata$Cases,sldata$Dist)
 cor.test(sldata$Deaths,sldata$Dist)
+
+
 
 library(ggplot2)
 library(ggrepel)
