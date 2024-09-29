@@ -59,20 +59,35 @@ summary(Dengue$DC[Dengue$Month==1])
 summary(Dengue$Rainfall[Dengue$Month==3])
 
 fmonthwise <- Dengue[which(Dengue$Year<='2022'), ]
+fmonthwise_Jun <- fmonthwise[which(fmonthwise$Month <= 6), ]
+
+agg = aggregate(fmonthwise_Jun$DC, by = list(fmonthwise_Jun$Month), FUN = sum, na.omit = T)
+agg
+sum(agg$x)
+
+agg = aggregate(fmonthwise_Jun$DC, by = list(fmonthwise_Jun$Month), FUN = mean, na.omit = T)
+agg
+mean(agg$x)
+
 sum(fmonthwise$DC)
 sum(fmonthwise$DD)
 
 mean(fmonthwise$Rainfall)
 
 agg = aggregate(fmonthwise$Rainfall, by = list(fmonthwise$Year), FUN = sum, na.omit = T)
-mean(agg$x)
+median(agg$x)
+IQR(fmonthwise$Rainfall)
 
-mean(fmonthwise$AvgT)
+median(fmonthwise$AvgT)
+IQR(fmonthwise$AvgT)
 
 describe.by(fmonthwise$Rainfall,fmonthwise$Month)
 describe.by(fmonthwise$AvgT,fmonthwise$Month)
 
-afmonthwise <- Dengue[which(Dengue$Year>'2022'), ]
+afmonthwise_Jun <- Dengue[which(Dengue$Year=='2023'), ]
+afmonthwise_Jun <- afmonthwise_Jun[which(afmonthwise_Jun$Month <= 6), ]
+describe(afmonthwise_Jun$DC)
+
 sum(afmonthwise$DC)
 sum(afmonthwise$DD)
 
@@ -607,14 +622,91 @@ dendat$PDnum <- dendat$PD
 dendat$URRnum <- dendat$URR*100
 dendat$DFDnum <- dendat$DFD
 
+dendat$Date
 
-fit <- glmmTMB(Cases ~ URRnum + PDnum +  DFDnum + AvgTemp + 
-                 Rainfall + RH + (1|Location) , na.action=na.omit, 
+fit <- glmmTMB(Cases ~ URRnum + (1|Location), na.action=na.omit, 
+               family = nbinom1(link = "log"), data = dendat)
+
+
+library(car)
+summary(fit)
+rmse(fit)
+round(exp(confint(fit)),2)
+
+options(scipen = 999)
+performance::performance(fit)
+
+fit <- glmmTMB(Cases ~ MFR + (1|Location), na.action=na.omit, 
                family = nbinom1(link = "log"), data = dendat)
 library(car)
 summary(fit)
 rmse(fit)
-exp(confint(fit))
+round(exp(confint(fit)),2)
+
+options(scipen = 999)
+performance::performance(fit)
+
+
+fit <- glmmTMB(Cases ~ PDnum + (1|Location), na.action=na.omit, 
+               family = nbinom1(link = "log"), data = dendat)
+library(car)
+summary(fit)
+rmse(fit)
+round(exp(confint(fit)),2)
+
+options(scipen = 999)
+performance::performance(fit)
+
+
+fit <- glmmTMB(Cases ~ DFDnum + (1|Location), na.action=na.omit, 
+               family = nbinom1(link = "log"), data = dendat)
+library(car)
+summary(fit)
+rmse(fit)
+round(exp(confint(fit)),2)
+
+options(scipen = 999)
+performance::performance(fit)
+
+
+fit <- glmmTMB(Cases ~ AvgTemp + (1|Location), na.action=na.omit, 
+               family = nbinom1(link = "log"), data = dendat)
+library(car)
+summary(fit)
+rmse(fit)
+round(exp(confint(fit)),2)
+
+options(scipen = 999)
+performance::performance(fit)
+
+
+fit <- glmmTMB(Cases ~ Rainfall + (1|Location), na.action=na.omit, 
+               family = nbinom1(link = "log"), data = dendat)
+library(car)
+summary(fit)
+rmse(fit)
+round(exp(confint(fit)),2)
+
+options(scipen = 999)
+performance::performance(fit)
+
+
+fit <- glmmTMB(Cases ~ RH + (1|Location), na.action=na.omit, 
+               family = nbinom1(link = "log"), data = dendat)
+library(car)
+summary(fit)
+rmse(fit)
+round(exp(confint(fit)),2)
+
+options(scipen = 999)
+performance::performance(fit)
+
+fit <- glmmTMB(Cases ~ (1|Location), na.action=na.omit, 
+               family = nbinom1(link = "log"), data = dendat)
+library(car)
+summary(fit)
+rmse(fit)
+round(exp(confint(fit)),2)
 
 options(scipen = 999)
 performance::performance(fit)
@@ -623,28 +715,16 @@ performance::performance(fit)
 
 
 
+fit <- glmmTMB(Cases ~ URRnum + PDnum +  DFDnum + AvgTemp + 
+                 Rainfall + RH + (1|Location), na.action=na.omit, 
+               family = nbinom1(link = "log"), data = dendat)
+library(car)
+summary(fit)
+rmse(fit)
+round(exp(confint(fit)),2)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+options(scipen = 999)
+performance::performance(fit)
 
 
 
