@@ -872,3 +872,28 @@ dev.off()
 
 
 
+setwd('E:\\ResearchProject\\Najmul Bhai\\Dengue\\Dengue South-Asia')
+FourYdata <- read.csv("D4YD.csv", header = T)
+
+FourYdata$Years <- factor(FourYdata$Years )
+
+FourYdata %>%
+  ggplot(aes(factor(Months),Cases, fill=Years, vjust = 0.5, angle = 90),Cases)+
+  scale_y_continuous(limits = c(0, 90000))+
+  geom_col(position="dodge") +
+  labs(title="Monthly Dengue Cases, Bangladesh (2000-2024)",
+       x="Months", y= "Cases")+
+  scale_x_discrete(limits = c("1", "2", "3", 
+                              "4", "5", "6", 
+                              "7", "8", "9", 
+                              "10", "11", "12"),
+                   labels = c("Jan", "Feb", 
+                              "Mar", "Apr", "May", 
+                              "Jun", "Jul",
+                              "Aug", "Sep", 
+                              "Oct", "Nov", "Dec"))+theme(axis.text=element_text(size=12,face="bold"),
+                                                          axis.title=element_text(size=14,face="bold"))+
+  theme(plot.title = element_text(size = 16, face = "bold",hjust = 0.5) ) +
+  scale_color_manual(values=c("darkgreen", "black"))
+
+
